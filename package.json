@@ -1,0 +1,36 @@
+{
+  "name": "koishi-plugin-gitlab-webhook",
+  "description": "gitlab webhook",
+  "version": "2.0.1",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "dist"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "chatbot",
+    "koishi",
+    "plugin"
+  ],
+  "koishi": {
+    "service": {
+      "required": [
+        "server"
+      ]
+    }
+  },
+  "peerDependencies": {
+    "@koishijs/plugin-server": "^3.2.4",
+    "koishi": "^4.18.0"
+  },
+  "devDependencies": {
+    "@koishijs/plugin-server": "^3.2.4",
+    "koishi": "^4.18.0",
+    "koishi-plugin-event-server": "^0.0.1"
+  },
+  "dependencies": {
+    "gitlab-event-types": "^2.1.1"
+  }
+}
