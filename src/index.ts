@@ -3,7 +3,6 @@ import { Context, Schema } from 'koishi'
 import {} from '@koishijs/plugin-server'
 import {} from 'koishi-plugin-event-server'
 
-// Some webhook payload variants may not contain `project`. We extract only those that do.
 type GitlabProjectEvent = Extract<WebhookEvents, { project: any }>
 
 type WebhookEventMap = {
