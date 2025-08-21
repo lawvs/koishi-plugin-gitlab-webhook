@@ -3,18 +3,11 @@ import { Context, Schema } from 'koishi'
 import {} from '@koishijs/plugin-server'
 import {} from 'koishi-plugin-event-server'
 
-declare module 'gitlab-event-types' {
-  interface GroupMemberEvent {
-    object_kind: 'group_member'
-  }
-
-  interface SubgroupEvent {
-    object_kind: 'subgroup'
-  }
-}
+// Some webhook payload variants may not contain `project`. We extract only those that do.
+type GitlabProjectEvent = Extract<WebhookEvents, { project: any }>
 
 type WebhookEventMap = {
-  [E in WebhookEvents['object_kind'] as `gitlab/${E}`]: (payload: WebhookEvents & { object_kind: E }) => void
+  [E in GitlabProjectEvent['object_kind'] as `gitlab/${E}`]: (payload: Extract<GitlabProjectEvent, { object_kind: E }>) => void
 }
 
 declare module 'koishi' {
@@ -68,7 +61,7 @@ export function apply(ctx: Context, config: Config) {
     ctx.logger.debug('received %s for %s', event, project)
 
     // Find matching webhook configuration
-    const webhook = config.webhooks.find((webhook) => {
+    const webhook = config.webhooks?.find((webhook) => {
       return webhook.project === '*' || webhook.project === project
     })
     if (!webhook) {
