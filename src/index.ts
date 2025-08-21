@@ -50,7 +50,7 @@ export function apply(ctx: Context, config: Config) {
       return koa.status = 400
     }
 
-    if (!('project' in payload)) {
+    if (!('project' in payload) || !payload.project) {
       ctx.logger.warn('Webhook payload does not contain project information')
       return koa.status = 400
     }

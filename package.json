@@ -31,6 +31,6 @@
     "koishi-plugin-event-server": "^0.0.1"
   },
   "dependencies": {
-    "gitlab-event-types": "^2.1.1"
+    "gitlab-event-types": "^3.0.1"
   }
 }
